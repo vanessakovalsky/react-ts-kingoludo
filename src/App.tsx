@@ -2,23 +2,16 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import WelcomeComponent from './Welcome';
+import GameList from './components/gameList';
+import GameAdd from './components/gameAdd';
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <WelcomeComponent name="Arthur" level={12} />
+      <GameList />
+      <GameAdd />
     </div>
   );
 }
