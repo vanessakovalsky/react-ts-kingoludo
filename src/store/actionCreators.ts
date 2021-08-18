@@ -42,16 +42,6 @@ export function postDataGame(action: GameAction) {
         break;
     case 'REMOVE_GAME':
         console.log('supprime');
-        return (dispatch: DispatchType) => {
-            setTimeout(() => {
-              dispatch(action)
-            }, 5)
-          }
         break;
     }
-    return (dispatch: DispatchType) => {
-        setTimeout(() => {
-          dispatch(action)
-        }, 500)
-      }
 }

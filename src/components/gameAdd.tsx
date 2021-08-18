@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form, FormikHelpers, FormikProps } from "formik";
 import { TextField, Button } from "@material-ui/core";
 import * as Yup from 'yup';
-import { Dispatch } from 'redux';
-import { useDispatch } from 'react-redux'
-import { addGame } from "../store/actionCreators";
+import { AppContext } from "../context";
 
 const GameAdd = () => {
-    const dispatch: Dispatch<any> = useDispatch()
+    //const dispatch: Dispatch<any> = useDispatch()
+    const { state, dispatch } = useContext(AppContext)
     return (
         <Formik
             initialValues={{
@@ -18,7 +17,8 @@ const GameAdd = () => {
                 FormikHelpers<Game>) => {
                     setTimeout(() => {
                         alert(JSON.stringify(values, null, 2));
-                        dispatch({type: 'ADD_GAME', values});
+                        //dispatch({type: 'ADD_GAME', values});
+                        dispatch({type: 'ADD_GAME', values: values})
                         setSubmitting(false);
                     }, 500);
                 }}

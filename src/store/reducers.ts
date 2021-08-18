@@ -1,3 +1,4 @@
+import { addGame, postDataGame } from "./actionCreators";
 import * as actionTypes from "./actionTypes";
 
 const initialState: Games = {
@@ -32,6 +33,8 @@ const reducer = (
                     anneeDeSortie: action.values.anneeDeSortie,
                     categorie: action.values.categorie, 
                 }
+                addGame(newGame)
+
                 return {
                     ...state,
                     list: state.list.concat(newGame),

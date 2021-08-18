@@ -1,39 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import GameItem from './gameItem';
 
-import axiosInstance from '../http-common';
-
-import { useSelector, shallowEqual, useDispatch } from "react-redux"
+import { useSelector, shallowEqual } from "react-redux"
+import useAPIGameList from '../apiCall';
+import { AppContext } from '../context';
+import { addGame } from '../store/actionCreators';
 
 const GameList = () => {
-    const [games,setGames] = useState<Game[]>([]);;
-    React.useEffect(() => {
-        axiosInstance.get<Game[]>('/jeux')
-            .then(response => {
-                setGames(response.data);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .then(() => {
-                console.log(games)
-            });
 
-        }, []);
+    // Redux way to get data
+    // const games: readonly Game[] = useSelector(
+    //         (state: Games) => state.list,
+    //         shallowEqual
+    //       )
 
-        console.log(games)
-    
-    const games2: readonly Game[] = useSelector(
-            (state: Games) => state.list,
-            shallowEqual
-          )
+    // Custom hook way to get data with API call
+    //const games = useAPIGameList();
+
+    //Context / Hook way to get data
+    const { state, dispatch } = useContext(AppContext)
+    const games = state.list;
 
       return (
         <div>
-            {games2.map((game: Game) =>(
-                <GameItem game={game} key={game.id} />
+            {games.map((game: Game) =>(
+                <Link to={'/game/'+game.id}>
+                    <GameItem game={game} key={game.id} />
+                </Link>
             ))}
         </div>
       )
